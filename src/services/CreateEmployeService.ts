@@ -1,5 +1,4 @@
 import Dinero from 'dinero.js';
-import Employe from '../models/Employe';
 import EmployeRepository from '../repositories/EmployeRepository';
 import VMasker from 'vanilla-masker';
 

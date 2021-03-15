@@ -23,9 +23,6 @@ class CreateEmployeService {
                 throw new Error("Employe doesn't registered")
             }
 
-            
-            
-
             return employe;
 
            
