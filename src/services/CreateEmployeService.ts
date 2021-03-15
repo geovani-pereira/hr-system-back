@@ -24,7 +24,7 @@ class CreateEmployeService {
 
             const oneDollarOver = difference * 0.19;
 
-            tax_amount = Dinero({amount: oneDollarOver, currency: 'AUD', precision:2}).toFormat('$0,0.00');
+            tax_amount = Dinero({amount: oneDollarOver, currency: 'AUD', precision:2}).setLocale('en-AU').toFormat('$0,0.00');
         }
 
         if((salary >= 3700100) && (salary <= 9000000)){
@@ -38,7 +38,7 @@ class CreateEmployeService {
                 differenceValue += 3572000;
             
             
-            let valorImposto2 = Dinero({amount: differenceValue, currency: 'AUD', precision:3}).toFormat("$0,0.00")
+            let valorImposto2 = Dinero({amount: differenceValue, currency: 'AUD', precision:3}).setLocale('en-AU').toFormat("$0,0.00")
            
     
             tax_amount = valorImposto2;
@@ -57,7 +57,7 @@ class CreateEmployeService {
                 differenceValue += 20797000;
             
             
-            let taxValue = Dinero({amount: differenceValue, currency: 'AUD', precision:3}).toFormat("$0,0.00")
+            let taxValue = Dinero({amount: differenceValue, currency: 'AUD', precision:3}).setLocale('en-AU').toFormat("$0,0.00")
            
     
             tax_amount = taxValue;
@@ -76,7 +76,7 @@ class CreateEmployeService {
                 differenceValue += 54097000;
             
             
-            let taxValue = Dinero({amount: differenceValue, currency: 'AUD', precision:3}).toFormat("$0,0.00")
+            let taxValue = Dinero({amount: differenceValue, currency: 'AUD', precision:3}).setLocale('en-AU').toFormat("$0,0.00")
            
     
             tax_amount = taxValue;
@@ -85,25 +85,18 @@ class CreateEmployeService {
         }
 
         let salarySave = VMasker.toMoney(salary, {
-            // Decimal precision -> "90"
+          
             precision: 2,
 
-            // Decimal separator -> ",90"
+          
             separator: '.',
 
-            // Number delimiter -> "12.345.678"
             delimiter: ',',
 
-            // Money unit -> "R$ 12.345.678,90"
+            
             unit: '$',
 
-            // Money unit -> "12.345.678,90 R$"
-            // suffixUnit: '$',
-
-            // Force type only number instead decimal,
-            // masking decimals with ",00"
-            // Zero cents -> "R$ 1.234.567.890,00"
-            // zeroCents: true
+          
         });
             const employe = await this.employeRepository.create(firstName, lastName, salarySave, tax_amount);
             
