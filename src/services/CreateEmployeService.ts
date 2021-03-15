@@ -1,7 +1,7 @@
 import Dinero from 'dinero.js';
 import Employe from '../models/Employe';
 import EmployeRepository from '../repositories/EmployeRepository';
-
+import VMasker from 'vanilla-masker';
 
 
 interface Request {
@@ -83,7 +83,29 @@ class CreateEmployeService {
 
 
         }
-            const employe = await this.employeRepository.create(firstName, lastName, salary, tax_amount);
+
+        let salarySave = VMasker.toMoney(salary, {
+            // Decimal precision -> "90"
+            precision: 2,
+
+            // Decimal separator -> ",90"
+            separator: '.',
+
+            // Number delimiter -> "12.345.678"
+            delimiter: ',',
+
+            // Money unit -> "R$ 12.345.678,90"
+            unit: '$',
+
+            // Money unit -> "12.345.678,90 R$"
+            // suffixUnit: '$',
+
+            // Force type only number instead decimal,
+            // masking decimals with ",00"
+            // Zero cents -> "R$ 1.234.567.890,00"
+            // zeroCents: true
+        });
+            const employe = await this.employeRepository.create(firstName, lastName, salarySave, tax_amount);
             
             return employe;
 

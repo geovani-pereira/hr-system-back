@@ -4,9 +4,9 @@ class Employe {
     id: string;
     firstName: string;
     lastName: string;
-    salary: number;
+    salary: string;
     tax_amount: string;
-    constructor(firstName: string, lastName:string, salary:number, tax_amount: string){
+    constructor(firstName: string, lastName:string, salary:string, tax_amount: string){
         this.id = uuid();
         this.firstName = firstName;
         this.lastName= lastName;

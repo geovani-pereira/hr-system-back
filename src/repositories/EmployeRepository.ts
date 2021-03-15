@@ -31,7 +31,7 @@ class EmployeRepository{
 
     }
 
-    public create(firstName: string, lastName: string, salary: number, tax_amount: string): Employe{
+    public create(firstName: string, lastName: string, salary: string, tax_amount: string): Employe{
         const employe = new Employe(firstName,lastName,salary,tax_amount);
 
         this.employees.push(employe);
