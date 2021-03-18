@@ -1,6 +1,6 @@
 import {uuid} from 'uuidv4'
 
-class Employe {
+class Employee {
     id: string;
     firstName: string;
     lastName: string;
@@ -16,4 +16,4 @@ class Employe {
 }
 
 
-export default Employe;
+export default Employee;

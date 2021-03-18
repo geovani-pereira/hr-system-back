@@ -1,5 +1,5 @@
 import Dinero from 'dinero.js';
-import EmployeRepository from '../repositories/EmployeRepository';
+import EmployeeRepository from '../repositories/EmployeeRepository';
 import VMasker from 'vanilla-masker';
 
 
@@ -9,10 +9,10 @@ interface Request {
     salary: number
 }
 
-class CreateEmployeService {
-    private employeRepository: EmployeRepository;
-    constructor(employeRepository: EmployeRepository) {
-        this.employeRepository = employeRepository;
+class CreateEmployeeService {
+    private employeeRepository: EmployeeRepository;
+    constructor(employeeRepository: EmployeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     public async  execute({ firstName, lastName, salary }: Request) {
@@ -37,10 +37,10 @@ class CreateEmployeService {
                 differenceValue += 3572000;
             
             
-            let valorImposto2 = Dinero({amount: differenceValue, currency: 'AUD', precision:3}).setLocale('en-AU').toFormat("$0,0.00")
+            let taxValue = Dinero({amount: differenceValue, currency: 'AUD', precision:3}).setLocale('en-AU').toFormat("$0,0.00")
            
     
-            tax_amount = valorImposto2;
+            tax_amount = taxValue;
 
 
         }
@@ -97,9 +97,9 @@ class CreateEmployeService {
 
           
         });
-            const employe = await this.employeRepository.create(firstName, lastName, salarySave, tax_amount);
+            const employee = await this.employeeRepository.create(firstName, lastName, salarySave, tax_amount);
             
-            return employe;
+            return employee;
 
            
 
@@ -108,4 +108,4 @@ class CreateEmployeService {
     }
 
 
-    export default CreateEmployeService;
+    export default CreateEmployeeService;

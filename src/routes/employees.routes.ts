@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import EmployeRepository from '../repositories/EmployeRepository';
-import CreateEmployeService from '../services/CreateEmployeService';
-import DeleteEmployeService from '../services/DeleteEmployeService';
+import EmployeeRepository from '../repositories/EmployeeRepository';
+import CreateEmployeeService from '../services/CreateEmployeeService';
+import DeleteEmployeService from '../services/DeleteEmployeeService';
 
 const employeesRouter = Router();
-const employeRepository = new EmployeRepository();
+const employeeRepository = new EmployeeRepository();
 
 
 employeesRouter.get('/', (request, response) => {
-    const employees = employeRepository.all();
+    const employees = employeeRepository.all();
 
     return response.json(employees);
 })
@@ -16,11 +16,11 @@ employeesRouter.get('/', (request, response) => {
 employeesRouter.post('/', async (request, response) => {
     try {
         const { firstName, lastName, salary } = request.body;
-        const createEmploye = new CreateEmployeService(employeRepository);
+        const createEmployee = new CreateEmployeeService(employeeRepository);
 
-        const employe = await createEmploye.execute({ firstName, lastName, salary });
+        const employee = await createEmployee.execute({ firstName, lastName, salary });
 
-        return response.json(employe);
+        return response.json(employee);
     } catch (err) {
         return response.status(400).json({ error: err.message })
     }
@@ -30,9 +30,9 @@ employeesRouter.post('/', async (request, response) => {
 employeesRouter.delete('/:id', async (request, response) => {
     try {
         const id = request.params.id;
-        const deleteEmploye = new DeleteEmployeService(employeRepository);
+        const deleteEmployee = new DeleteEmployeService(employeeRepository);
 
-        const deleted = await deleteEmploye.execute(id);
+        const deleted = await deleteEmployee.execute(id);
         return response.json(deleted);
     } catch (err) {
         return response.status(400).json({ error: err.message })
